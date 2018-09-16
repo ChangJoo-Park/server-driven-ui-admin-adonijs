@@ -1,8 +1,8 @@
 {
-  "name": "adonis-api-app",
+  "name": "adonis-api-server-driven",
   "version": "4.1.0",
   "adonis-version": "4.1.0",
-  "description": "Adonisjs boilerplate for API server with pre-configured JWT",
+  "description": "Adonisjs boilerplate for API server with pre-configured JWT and Server Driven UI :)",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
@@ -10,10 +10,11 @@
   },
   "keywords": [
     "adonisjs",
-    "adonis-app"
+    "adonis-app",
+    "server-driven-ui"
   ],
-  "author": "",
-  "license": "UNLICENSED",
+  "author": "ChangJoo Park",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@adonisjs/ace": "^5.0.2",
