@@ -1,0 +1,12 @@
+GET http://localhost:3333/lists HTTP/1.1
+
+###
+GET http://localhost:3333/lists/3 HTTP/1.1
+
+###
+PUT http://localhost:3333/lists/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "items": [1,2,3]
+}

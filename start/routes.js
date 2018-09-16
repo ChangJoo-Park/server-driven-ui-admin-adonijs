@@ -21,3 +21,13 @@ Route.get('/', () => {
     greeting: 'Hello world in JSON'
   }
 })
+/* Items */
+Route.get('/items', 'ItemController.index')
+Route.get('/items/:id', 'ItemController.show')
+
+/* Lists */
+Route.get('lists', 'ListController.index')
+Route.get('lists/:id', 'ListController.show')
+Route.post('lists', 'ListController.store')
+Route.put('lists/:id', 'ListController.update')
+Route.delete('lists/:id', 'ListController.delete')
