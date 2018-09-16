@@ -27,7 +27,7 @@ Route.get('/items/:id', 'ItemController.show')
 
 /* Lists */
 Route.get('lists', 'ListController.index')
-Route.get('lists/:id', 'ListController.show')
+Route.get('lists/:id', 'ListController.show').middleware(['findList'])
 Route.post('lists', 'ListController.store')
-Route.put('lists/:id', 'ListController.update')
-Route.delete('lists/:id', 'ListController.delete')
+Route.put('lists/:id', 'ListController.update').middleware(['findList'])
+Route.delete('lists/:id', 'ListController.delete').middleware(['findList'])

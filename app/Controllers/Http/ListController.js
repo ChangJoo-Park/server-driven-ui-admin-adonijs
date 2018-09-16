@@ -11,7 +11,6 @@ class ListController {
   async index({
     request,
     response,
-    view
   }) {
     const lists = await List.query()
       .with('items')
@@ -56,19 +55,20 @@ class ListController {
    * GET lists/:id
    */
   async show({
-    params,
+    params: {
+      id
+    },
     request,
     response,
-    view
   }) {
     const {
-      id
-    } = request.params
-    const list = await List.find(id)
+      list
+    } = request.post()
+
     list.items = await list.items().fetch()
-    return list
+
     response.status(200).json({
-      message: 'one list',
+      message: 'Here is your project.',
       data: list
     })
   }
@@ -86,9 +86,14 @@ class ListController {
       id
     } = params
     const {
+      name,
+      description,
+      list,
       items
     } = request.post()
-    const list = await List.find(id)
+    list.name = name || list.name
+    list.description = description || list.description
+    await list.save()
 
     if (items && items.length > 0) {
       await list.items().detach()
