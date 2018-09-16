@@ -112,19 +112,16 @@ class ListController {
    * DELETE lists/:id
    */
   async delete({
-    params,
+    params: { id },
     request,
     response
   }) {
     const {
-      id
-    } = params
-
-    const {
       list
-    } = await List.find(1)
+    } = request.post()
 
     await list.delete()
+    
     response.status(200).json({
       message: 'Successfully deleted this list.',
       deleted: true
