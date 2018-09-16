@@ -10,7 +10,7 @@ class ListController {
    */
   async index({
     request,
-    response,
+    response
   }) {
     const lists = await List.query()
       .with('items')
@@ -59,7 +59,7 @@ class ListController {
       id
     },
     request,
-    response,
+    response
   }) {
     const {
       list
@@ -68,7 +68,7 @@ class ListController {
     list.items = await list.items().fetch()
 
     response.status(200).json({
-      message: 'Here is your project.',
+      message: 'Here is your List.',
       data: list
     })
   }
@@ -112,7 +112,9 @@ class ListController {
    * DELETE lists/:id
    */
   async delete({
-    params: { id },
+    params: {
+      id
+    },
     request,
     response
   }) {
@@ -121,7 +123,7 @@ class ListController {
     } = request.post()
 
     await list.delete()
-    
+
     response.status(200).json({
       message: 'Successfully deleted this list.',
       deleted: true
