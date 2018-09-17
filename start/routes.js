@@ -24,6 +24,7 @@ Route.get('/', () => {
 /* Items */
 Route.get('/items', 'ItemController.index')
 Route.get('/items/:id', 'ItemController.show').middleware(['findItem'])
+Route.post('/items', 'ItemController.store')
 Route.patch('/items/:id', 'ItemController.update').middleware(['findItem'])
 
 /* Lists */
