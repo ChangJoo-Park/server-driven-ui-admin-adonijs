@@ -4,6 +4,7 @@ const Item = use('App/Models/Item')
 class FindItem {
   async handle({
     request,
+    response,
     params: {
       id
     }

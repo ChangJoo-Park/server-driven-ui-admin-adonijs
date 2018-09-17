@@ -4,6 +4,7 @@ const List = use('App/Models/List')
 class FindList {
   async handle({
     request,
+    response,
     params: {
       id
     }
