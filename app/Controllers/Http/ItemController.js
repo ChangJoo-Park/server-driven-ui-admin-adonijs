@@ -112,11 +112,24 @@ class ItemController {
    * Delete a item with id.
    * DELETE items/:id
    */
-  async destroy({
-    params,
+  async delete({
+    params: {
+      id
+    },
     request,
     response
-  }) {}
+  }) {
+    const {
+      item
+    } = request.post()
+
+    await item.delete()
+
+    response.status(200).json({
+      message: 'Successfully deleted this item.',
+      deleted: true
+    })
+  }
 }
 
 module.exports = ItemController
