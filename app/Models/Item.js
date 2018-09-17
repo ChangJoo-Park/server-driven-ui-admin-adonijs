@@ -7,8 +7,8 @@ class Item extends Model {
     return this.belongsToMany('App/Models/List')
   }
 
-  type() {
-    return this.belongsTo('App/Models/ItemType', 'type_id', 'item_types.id')
+  itemType() {
+    return this.belongsTo('App/Models/ItemType')
   }
 }
 

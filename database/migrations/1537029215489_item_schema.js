@@ -8,8 +8,7 @@ class ItemSchema extends Schema {
       table.increments()
       table.string('name', 60).notNullable()
       table.string('description', 100).notNullable().defaultTo('')
-      table.integer('type_id').unsigned().notNullable();
-      table.foreign('type_id').references('id').inTable('item_types');
+      table.integer('item_type_id').unsigned();
       table.timestamps()
     })
   }
