@@ -37,8 +37,6 @@ Content-Type: application/json
   "description": "Hello World"
 }
 
-
-
 ###
 GET http://localhost:3333/item-types HTTP/1.1
 
