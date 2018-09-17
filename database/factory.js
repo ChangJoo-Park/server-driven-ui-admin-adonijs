@@ -26,15 +26,10 @@ Factory.blueprint('App/Models/ItemType', (faker, i, data) => {
   }
 })
 
-Factory.blueprint('App/Models/Item', (faker, i, data) => {
-  const ItemType = data.types[faker.integer({
-    min: 0,
-    max: data.types.length - 1
-  })]
+Factory.blueprint('App/Models/Item', (faker, i) => {
   return {
     name: faker.word(),
-    description: faker.sentence(),
-    type_id: ItemType.id
+    description: faker.sentence()
   }
 })
 
