@@ -1,5 +1,6 @@
 'use strict'
 const Item = use('App/Models/Item')
+const ItemType = use('App/Models/ItemType')
 /**
  * Resourceful controller for interacting with items
  */
@@ -10,22 +11,11 @@ class ItemController {
    */
   async index({
     request,
-    response,
-    view
+    response
   }) {
     const items = await Item.all()
     return items
   }
-
-  /**
-   * Render a form to be used for creating a new item.
-   * GET items/create
-   */
-  async create({
-    request,
-    response,
-    view
-  }) {}
 
   /**
    * Create/save a new item.
@@ -43,30 +33,59 @@ class ItemController {
   async show({
     params,
     request,
-    response,
-    view
-  }) {}
+    response
+  }) {
+    const {
+      item
+    } = request.post()
 
-  /**
-   * Render a form to update an existing item.
-   * GET items/:id/edit
-   */
-  async edit({
-    params,
-    request,
-    response,
-    view
-  }) {}
+    item.type = await item.type().fetch()
+
+    response.status(200).json({
+      message: 'Here is your Item',
+      data: item
+    })
+  }
 
   /**
    * Update item details.
    * PUT or PATCH items/:id
    */
   async update({
-    params,
+    params: {
+      id
+    },
     request,
     response
-  }) {}
+  }) {
+    const {
+      name,
+      description,
+      type,
+      item
+    } = request.post()
+
+    item.name = name || item.name
+    item.description = description || item.description
+
+    if (type) {
+      const itemType = await ItemType.find(type)
+      if (itemType) {
+        item.type_id = type
+      }
+    }
+
+    await item.save()
+
+    if (item.type_id) {
+      item.type = await item.type().fetch()
+    }
+
+    response.status(200).json({
+      message: 'Update Item successfully',
+      data: item
+    })
+  }
 
   /**
    * Delete a item with id.
