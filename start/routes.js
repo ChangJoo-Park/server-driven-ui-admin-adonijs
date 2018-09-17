@@ -37,7 +37,7 @@ Route.delete('lists/:id', 'ListController.delete').middleware(['findList'])
 
 /* Item Types */
 Route.get('/item-types', 'ItemTypeController.index')
-Route.get('/item-types/:id', 'ItemTypeController.show')
+Route.get('/item-types/:id', 'ItemTypeController.show').middleware(['findItemType'])
 Route.post('/item-types', 'ItemTypeController.store')
-Route.patch('/item-types/:id', 'ItemTypeController.update')
-Route.delete('/item-types/:id', 'ItemTypeController.delete')
+Route.patch('/item-types/:id', 'ItemTypeController.update').middleware(['findItemType'])
+Route.delete('/item-types/:id', 'ItemTypeController.delete').middleware(['findItemType'])
