@@ -23,11 +23,12 @@ Route.get('/', () => {
 })
 /* Items */
 Route.get('/items', 'ItemController.index')
-Route.get('/items/:id', 'ItemController.show')
+Route.get('/items/:id', 'ItemController.show').middleware(['findItem'])
+Route.patch('/items/:id', 'ItemController.update').middleware(['findItem'])
 
 /* Lists */
 Route.get('lists', 'ListController.index')
 Route.get('lists/:id', 'ListController.show').middleware(['findList'])
 Route.post('lists', 'ListController.store')
-Route.put('lists/:id', 'ListController.update').middleware(['findList'])
+Route.patch('lists/:id', 'ListController.update').middleware(['findList'])
 Route.delete('lists/:id', 'ListController.delete').middleware(['findList'])
