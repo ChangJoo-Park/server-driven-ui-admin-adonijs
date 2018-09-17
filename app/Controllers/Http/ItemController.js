@@ -13,7 +13,11 @@ class ItemController {
     request,
     response
   }) {
-    const items = await Item.all()
+    const items = await Item.query()
+      .with('lists')
+      .with('itemType')
+      .fetch()
+
     return items
   }
 
@@ -24,7 +28,30 @@ class ItemController {
   async store({
     request,
     response
-  }) {}
+  }) {
+    const {
+      name,
+      description,
+      type
+    } = request.post()
+    console.log('name => ', name)
+    console.log('description => ', description)
+    console.log('type => ', type)
+    const item = await Item.create({
+      name,
+      description
+    })
+
+    if (type) {
+      item.itemType = await ItemType.find(type)
+      await item.save()
+    }
+
+    response.status(201).json({
+      message: 'Item created successfully',
+      data: item
+    })
+  }
 
   /**
    * Display a single item.
@@ -61,24 +88,18 @@ class ItemController {
     const {
       name,
       description,
-      type,
+      itemType,
       item
     } = request.post()
 
     item.name = name || item.name
     item.description = description || item.description
-
-    if (type) {
-      const itemType = await ItemType.find(type)
-      if (itemType) {
-        item.type_id = type
-      }
-    }
+    item.item_type_id = itemType || item.item_type_id
 
     await item.save()
 
-    if (item.type_id) {
-      item.type = await item.type().fetch()
+    if (item.item_type_id) {
+      item.itemType = await item.itemType().fetch()
     }
 
     response.status(200).json({
