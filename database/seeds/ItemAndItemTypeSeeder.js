@@ -36,9 +36,7 @@ class ItemAndItemTypeSeeder {
     const types = await Database.table('item_types')
 
     if ((await Database.table('items')).length === 0) {
-      await Factory.model('App/Models/Item').createMany(100, {
-        types
-      })
+      await Factory.model('App/Models/Item').createMany(100)
     }
 
     if ((await Database.table('lists')).length === 0) {
