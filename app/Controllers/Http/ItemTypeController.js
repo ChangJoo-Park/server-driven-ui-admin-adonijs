@@ -1,5 +1,5 @@
 'use strict'
-
+const ItemType = use('App/Models/ItemType')
 /**
  * Resourceful controller for interacting with itemtypes
  */
@@ -10,9 +10,16 @@ class ItemTypeController {
    */
   async index({
     request,
-    response,
-    view
-  }) {}
+    response
+  }) {
+    const itemTypes = await ItemType
+      .query()
+      .with('items')
+      .withCount('items')
+      .fetch()
+
+    return itemTypes
+  }
 
   /**
    * Create/save a new itemtype.
@@ -32,7 +39,17 @@ class ItemTypeController {
     request,
     response,
     view
-  }) {}
+  }) {
+    const {
+      itemType
+    } = request.post()
+
+    itemType.items = await itemType.items().fetch()
+    response.status(200).json({
+      message: 'Here is your Item',
+      data: itemType
+    })
+  }
 
   /**
    * Update itemtype details.
