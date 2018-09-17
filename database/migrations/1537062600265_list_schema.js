@@ -6,8 +6,8 @@ class ListSchema extends Schema {
   up() {
     this.create('lists', (table) => {
       table.increments()
-      table.string('name', 60).notNullable().unique()
-      table.string('description')
+      table.string('name', 60).notNullable()
+      table.string('description').defaultTo('')
       table.timestamps()
     })
   }
