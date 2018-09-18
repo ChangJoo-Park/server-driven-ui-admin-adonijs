@@ -34,9 +34,7 @@ class ItemController {
       description,
       type
     } = request.post()
-    console.log('name => ', name)
-    console.log('description => ', description)
-    console.log('type => ', type)
+
     const item = await Item.create({
       name,
       description
