@@ -28,7 +28,27 @@ class ItemTypeController {
   async store({
     request,
     response
-  }) {}
+  }) {
+    const {
+      name
+    } = request.post()
+    const existsType = await ItemType.query().where('name', name).fetch()
+    if (existsType) {
+      console.log('existsType => ')
+      return response.status(403).json({
+        message: `ItemType ${name} is exists`,
+        data: existsType
+      })
+    }
+    const itemType = await ItemType.create({
+      name
+    })
+
+    return response.status(201).json({
+      message: 'ItemType created successfully',
+      data: itemType
+    })
+  }
 
   /**
    * Display a single itemtype.
