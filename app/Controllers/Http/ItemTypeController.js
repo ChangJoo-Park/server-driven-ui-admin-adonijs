@@ -86,10 +86,23 @@ class ItemTypeController {
    * DELETE itemtypes/:id
    */
   async delete({
-    params,
+    params: {
+      id
+    },
     request,
     response
-  }) {}
+  }) {
+    const {
+      itemType
+    } = request.post()
+
+    await itemType.delete()
+
+    return response.status(200).json({
+      message: 'Successfully deleted this item type.',
+      deleted: true
+    })
+  }
 }
 
 module.exports = ItemTypeController
