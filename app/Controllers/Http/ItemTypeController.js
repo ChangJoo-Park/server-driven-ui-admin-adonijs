@@ -76,10 +76,27 @@ class ItemTypeController {
    * PUT or PATCH itemtypes/:id
    */
   async update({
-    params,
+    params: {
+      id
+    },
     request,
     response
-  }) {}
+  }) {
+    const {
+      name,
+      itemType
+    } = request.post()
+
+    itemType.name = name || itemType.name
+
+    await itemType.save()
+
+    response.status(200).json({
+      message: 'Update ItemType successfully',
+      data: itemType
+    })
+
+  }
 
   /**
    * Delete a itemtype with id.
